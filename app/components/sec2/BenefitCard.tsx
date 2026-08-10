@@ -8,39 +8,141 @@ import {
     Gift,
 } from "lucide-react";
 
-const rewards = [
-    {
-        title: "Lightning purchasing",
-        value: "+50 CP",
-        icon: Zap,
-        color: "from-orange-400 to-yellow-400",
-        description:
-            "รับแต้มสะสมเพิ่มขึ้นเมื่อชำระผ่านไลท์นิ่งเน็ตเวิร์ค",
-    },
-    {
-        title: "Daily Impact",
-        value: "+250 CP",
-        icon: Gift,
-        color: "from-violet-500 to-pink-500",
-        description:
-            "เมื่อซื้อสินค้าตั้งแต่ 3 ครั้งขึ้นไปใน 1 วัน รับแต้มเพิ่มแบบจุกๆ",
-    },
-    {
-        title: "Special Meetup",
+import type { Language } from "@/app/page";
 
-        icon: Users,
-        color: "from-pink-500 to-orange-400",
-        description:
-            "เข้าร่วมกิจกรรมพิเศษสำหรับสมาชิก Bitcoin Membership",
-    },
-];
+interface BenefitSectionProps {
+    lang: Language;
+}
 
-export default function RewardSection() {
+const rewards = {
+    th: [
+        {
+            title: "Lightning purchasing",
+            value: "+50 CP",
+            icon: Zap,
+            color: "from-orange-400 to-yellow-400",
+            description:
+                "รับแต้มสะสมเพิ่มขึ้นเมื่อชำระผ่านไลท์นิ่งเน็ตเวิร์ค",
+        },
+        {
+            title: "Daily Impact",
+            value: "+250 CP",
+            icon: Gift,
+            color: "from-violet-500 to-pink-500",
+            description:
+                "เมื่อซื้อสินค้าตั้งแต่ 3 ครั้งขึ้นไปใน 1 วัน รับแต้มเพิ่มแบบจุกๆ",
+        },
+        {
+            title: "Special Meetup",
+            value: "Exclusive",
+            icon: Users,
+            color: "from-pink-500 to-orange-400",
+            description:
+                "เข้าร่วมกิจกรรมพิเศษสำหรับสมาชิก Bitcoin Membership",
+        },
+    ],
+
+    en: [
+        {
+            title: "Lightning purchasing",
+            value: "+50 CP",
+            icon: Zap,
+            color: "from-orange-400 to-yellow-400",
+            description:
+                "Earn extra points when you pay with the Lightning Network.",
+        },
+        {
+            title: "Daily Impact",
+            value: "+250 CP",
+            icon: Gift,
+            color: "from-violet-500 to-pink-500",
+            description:
+                "Make 3 or more purchases in a day and earn a bonus.",
+        },
+        {
+            title: "Special Meetup",
+            value: "Exclusive",
+            icon: Users,
+            color: "from-pink-500 to-orange-400",
+            description:
+                "Join exclusive events created for Bitcoin Membership members.",
+        },
+    ],
+
+    zh: [
+        {
+            title: "Lightning 支付",
+            value: "+50 CP",
+            icon: Zap,
+            color: "from-orange-400 to-yellow-400",
+            description:
+                "使用 Lightning Network 支付即可获得额外积分。",
+        },
+        {
+            title: "每日奖励",
+            value: "+250 CP",
+            icon: Gift,
+            color: "from-violet-500 to-pink-500",
+            description:
+                "一天内消费 3 次或以上，即可获得额外奖励积分。",
+        },
+        {
+            title: "特别活动",
+            value: "Exclusive",
+            icon: Users,
+            color: "from-pink-500 to-orange-400",
+            description:
+                "参加专为 Bitcoin Membership 会员举办的特别活动。",
+        },
+    ],
+};
+
+const content = {
+    th: {
+        badge: "สิทธิประโยชน์",
+        title1: "ซื้อ.",
+        title2: "รับ.",
+        title3: "รับสิทธิพิเศษมากขึ้น.",
+        description1: "เพียงซื้อสินค้าและบริการจากร้านค้าที่เข้าร่วมรายการกับ",
+        description2: "รับแต้มสะสมเพื่อแลกเป็นสินค้าหรือสิทธิพิเศษ",
+    },
+
+    en: {
+        badge: "Benefits",
+        title1: "Purchase.",
+        title2: "Earn.",
+        title3: "Get More Benefits.",
+        description1:
+            "Simply purchase products and services from participating merchants with",
+        description2:
+            "Earn points and redeem them for products and exclusive benefits.",
+    },
+
+    zh: {
+        badge: "会员权益",
+        title1: "消费.",
+        title2: "赚取.",
+        title3: "享受更多权益.",
+        description1:
+            "在参与 Bitcoin Membership 的商家购买商品和服务，",
+        description2:
+            "即可累积积分并兑换商品或专属权益。",
+    },
+};
+
+export default function BenefitSection({
+                                           lang,
+                                       }: BenefitSectionProps) {
+
+    const t = content[lang];
+    const currentRewards = rewards[lang];
+
     return (
-        <section className="relative overflow-hidden bg-black py-20">
+        <section className="relative bg-black overflow-hidden">
 
             {/* Glow */}
             <div className="absolute left-0 top-10 h-80 w-80 rounded-full bg-pink-500/10 blur-[120px]" />
+
             <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-orange-500/10 blur-[120px]" />
 
             <div className="relative mx-auto max-w-7xl px-6">
@@ -53,41 +155,61 @@ export default function RewardSection() {
                     transition={{ duration: 0.5 }}
                     className="text-center"
                 >
+
+                    {/* Badge */}
                     <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-xl">
+
                         <Coins
                             className="text-amber-500"
                             size={18}
                         />
 
                         <span className="text-sm tracking-[0.3em] text-zinc-300">
-                            Benefits
+                            {t.badge}
                         </span>
+
                     </div>
 
+
+                    {/* Heading */}
                     <h2 className="mt-8 font-line text-5xl text-white">
-                        Purchase.
+
+                        {t.title1}
+
                         <span className="bg-amber-500 bg-clip-text text-transparent">
-                            {" "}Earn.
+                            {" "}{t.title2}
                         </span>
+
                         <br />
-                        Get More Benefits.
+
+                        {t.title3}
+
                     </h2>
 
+
+                    {/* Description */}
                     <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
-                        เพียงซื้อสินค้าและบริการจากร้านค้าที่เข้าร่วมรายการกับ
+
+                        {t.description1}
+
                         <span className="bg-amber-500 bg-clip-text text-transparent">
                             {" "}Bitcoin Membership{" "}
                         </span>
+
                         <br />
-                        รับแต้มสะสมเพื่อแลกเป็นสินค้าหรือสิทธิพิเศษ
+
+                        {t.description2}
+
                     </p>
+
                 </motion.div>
 
 
                 {/* Reward Cards */}
                 <div className="mt-20 mb-20 grid grid-cols-1 items-stretch gap-8 md:grid-cols-3">
 
-                    {rewards.map((reward, index) => {
+                    {currentRewards.map((reward, index) => {
+
                         const Icon = reward.icon;
 
                         return (
@@ -173,7 +295,7 @@ export default function RewardSection() {
                                     </p>
 
 
-                                    {/* XP */}
+                                    {/* CP */}
                                     <div
                                         className="
                                             mt-auto

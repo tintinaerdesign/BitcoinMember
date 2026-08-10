@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { X, Phone, Mail } from 'lucide-react';
 import { FaLine } from 'react-icons/fa6';
-import Image from "next/image";
+import type { Language } from '@/app/page'; // ✅ Import Type มาจากไฟล์หลัก
 
 const modalContent = {
     th: {
@@ -19,6 +19,7 @@ const modalContent = {
         lineBtn: "เข้าสู่ระบบด้วย LINE",
         googleBtn: "เข้าสู่ระบบด้วย Google",
         terms: "การสมัครสมาชิกแสดงว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัว",
+        closeBtn: "ปิดหน้าต่าง",
     },
     en: {
         title: "Join Membership",
@@ -33,6 +34,7 @@ const modalContent = {
         lineBtn: "Continue with LINE",
         googleBtn: "Continue with Google",
         terms: "By joining, you agree to our Terms and Privacy Policy.",
+        closeBtn: "Close modal",
     },
     zh: {
         title: "注册会员",
@@ -47,13 +49,14 @@ const modalContent = {
         lineBtn: "使用 LINE 登录",
         googleBtn: "使用 Google 登录",
         terms: "注册即表示您同意我们的条款和隐私政策。",
+        closeBtn: "关闭窗口",
     },
 };
 
 interface RegisterModalProps {
     isOpen: boolean;
     onClose: () => void;
-    lang?: 'th' | 'en' | 'zh';
+    lang?: Language;
 }
 
 export default function RegisterModal({
@@ -62,10 +65,17 @@ export default function RegisterModal({
                                           lang = 'th',
                                       }: RegisterModalProps) {
     const [loginMethod, setLoginMethod] = useState<'phone' | 'email'>('phone');
+    const [inputValue, setInputValue] = useState(''); // ✅ เพิ่ม State เก็บค่าใน Input
 
     if (!isOpen) return null;
 
     const t = modalContent[lang];
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // TODO: ส่งข้อมูลไปยัง Backend/API
+        console.log(`Submitting ${loginMethod}:`, inputValue);
+    };
 
     return (
         <div
@@ -84,7 +94,7 @@ export default function RegisterModal({
                 <button
                     type="button"
                     onClick={onClose}
-                    aria-label={t.title}
+                    aria-label={t.closeBtn} // ✅ แก้ไข aria-label ให้ถูกต้อง
                     className="absolute right-5 top-5 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-zinc-300 transition-all hover:bg-white/20 hover:text-white"
                 >
                     <X size={22} />
@@ -95,11 +105,9 @@ export default function RegisterModal({
 
                     {/* Header */}
                     <div className="mb-6 text-center">
-
                         <h3 className="text-3xl font-bold text-amber-500">
                             {t.title}
                         </h3>
-
                         <p className="mt-2 text-[15px] leading-relaxed text-zinc-300">
                             {t.subtitle}
                         </p>
@@ -109,7 +117,10 @@ export default function RegisterModal({
                     <div className="mb-5 flex rounded-xl bg-black/40 p-1 border border-white/10">
                         <button
                             type="button"
-                            onClick={() => setLoginMethod('phone')}
+                            onClick={() => {
+                                setLoginMethod('phone');
+                                setInputValue(''); // เคลียร์ค่าเมื่อสลับแท็บ
+                            }}
                             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all cursor-pointer ${
                                 loginMethod === 'phone'
                                     ? 'bg-amber-500 text-black shadow-md'
@@ -120,7 +131,10 @@ export default function RegisterModal({
                         </button>
                         <button
                             type="button"
-                            onClick={() => setLoginMethod('email')}
+                            onClick={() => {
+                                setLoginMethod('email');
+                                setInputValue(''); // เคลียร์ค่าเมื่อสลับแท็บ
+                            }}
                             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all cursor-pointer ${
                                 loginMethod === 'email'
                                     ? 'bg-amber-500 text-black shadow-md'
@@ -132,7 +146,7 @@ export default function RegisterModal({
                     </div>
 
                     {/* Main Form */}
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    <form onSubmit={handleSubmit}>
                         {loginMethod === 'phone' ? (
                             <div className="relative">
                                 <Phone
@@ -142,6 +156,8 @@ export default function RegisterModal({
                                 <input
                                     type="tel"
                                     required
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
                                     placeholder={t.phonePlaceholder}
                                     className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
                                 />
@@ -155,6 +171,8 @@ export default function RegisterModal({
                                 <input
                                     type="email"
                                     required
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
                                     placeholder={t.emailPlaceholder}
                                     className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
                                 />

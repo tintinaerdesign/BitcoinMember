@@ -3,9 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import RegisterModal from "./RegisterModal";
-
-
 import { FaApple, FaAndroid, FaGlobe } from "react-icons/fa6";
+
+
+type Language = 'th' | 'en' | 'zh';
+
+interface FirstPanelProps {
+    lang: Language;
+}
+
 
 const content = {
     th: {
@@ -34,9 +40,8 @@ const content = {
     }
 };
 
-export default function FirstPanel() {
+export default function FirstPanel({ lang }: FirstPanelProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [lang, setLang] = useState<'th' | 'en' | 'zh'>('th');
 
     const t = content[lang];
 
