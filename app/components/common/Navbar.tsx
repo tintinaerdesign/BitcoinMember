@@ -37,7 +37,7 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
             /* ✅ แก้ไขการจัดกลางด้วย inset-x-0 mx-auto และกำหนด w-11/12 max-w-6xl */
             className={`
                 fixed inset-x-0 mx-auto z-50
-                border border-amber-500/30 bg-black/50 backdrop-blur-xl
+                border-b border-amber-500/30 bg-black/50 backdrop-blur-xl
                 shadow-[0_0_40px_rgba(236,41,0,0.12)]
                 transition-all duration-500
                 ${isScrolled ? "top-4 w-11/12 rounded-[28px]" : "top-0 w-full rounded-none"}
