@@ -3,14 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import RegisterModal from "./RegisterModal";
-import { FaApple, FaAndroid, FaGlobe } from "react-icons/fa";
+import { FaApple, FaAndroid, FaGlobe } from "react-icons/fa6";
 
 const content = {
     th: {
         title: "Bitcoin",
         subtitle: "Membership",
-        desc1: "สะสมแต้มและรับสิทธิพิเศษจาก",
-        desc2: " กับร้านค้าที่เข้าร่วมรายการ",
+        desc: "สะสมแต้มและรับสิทธิพิเศษมากมาย กับร้านค้าที่เข้าร่วมรายการกับ Bitcoin Membership",
         registerBtn: "สมัครสมาชิก",
         ios: "iOS",
         android: "Android"
@@ -18,17 +17,15 @@ const content = {
     en: {
         title: "Bitcoin",
         subtitle: "Membership",
-        desc1: "Collect points and get exclusive privileges from",
-        desc2: " with participating merchants.",
-        registerBtn: "Register",
+        desc: "Collect points and unlock exclusive privileges at participating merchants.",
+        registerBtn: "Register Now",
         ios: "iOS",
         android: "Android"
     },
     zh: {
         title: "Bitcoin",
         subtitle: "Membership",
-        desc1: "在合作商家累积积分并享受专属",
-        desc2: " 特权",
+        desc: "在合作商家累积积分并享受专属特权",
         registerBtn: "立即注册",
         ios: "iOS",
         android: "Android"
@@ -42,7 +39,7 @@ export default function FirstPanel() {
     const t = content[lang];
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-black font-line">
+        <section className="relative min-h-screen overflow-hidden bg-black font-line flex flex-col justify-between">
 
             {/* Background */}
             <Image
@@ -51,110 +48,103 @@ export default function FirstPanel() {
                 fill
                 priority
                 quality={90}
-                className="object-cover"
+                className="object-cover opacity-60"
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t
-                from-black/80 via-black/10 to-transparent"
-            />
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/5 to-transparent" />
 
             {/* --- Language Switcher --- */}
-            <div className="absolute top-6 right-6 md:top-10 md:right-12 z-50 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5 text-sm text-white">
-                <FaGlobe className="text-amber-500 text-base" />
+            <div className="absolute top-6 right-6 md:top-8 md:right-12 z-50 flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/15 rounded-full px-3.5 py-1.5 text-xs md:text-sm text-white shadow-xl">
+                <FaGlobe className="text-amber-500 text-sm" />
                 <button
                     type="button"
                     onClick={() => setLang('th')}
-                    className={`px-2 py-1 rounded-full cursor-pointer transition-all ${
-                        lang === 'th' ? 'bg-amber-500 text-black font-semibold' : 'hover:text-amber-400'
+                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
+                        lang === 'th' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
                     }`}
                 >
                     TH
                 </button>
-                <span className="text-white/30">|</span>
+                <span className="text-white/20">|</span>
                 <button
                     type="button"
                     onClick={() => setLang('en')}
-                    className={`px-2 py-1 rounded-full cursor-pointer transition-all ${
-                        lang === 'en' ? 'bg-amber-500 text-black font-semibold' : 'hover:text-amber-400'
+                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
+                        lang === 'en' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
                     }`}
                 >
                     EN
                 </button>
-                <span className="text-white/30">|</span>
+                <span className="text-white/20">|</span>
                 <button
                     type="button"
                     onClick={() => setLang('zh')}
-                    className={`px-2 py-1 rounded-full cursor-pointer transition-all ${
-                        lang === 'zh' ? 'bg-amber-500 text-black font-semibold' : 'hover:text-amber-400'
+                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
+                        lang === 'zh' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
                     }`}
                 >
                     中文
                 </button>
             </div>
 
-            {/* Content */}
-            <div className="relative z-30 flex max-w-5xl flex-col px-6 md:px-16 pt-24 md:pt-48">
+            {/* Main Content Area */}
+            <div className="relative z-30 flex max-w-4xl flex-col px-6 md:px-16 pt-12 md:pt-36 my-12">
 
                 {/* Header */}
-                <div className="flex items-center gap-2">
-                    <Image
-                        src="/assets/BitcoinTrans.png"
-                        alt="Bitcoin"
-                        width={100}
-                        height={100}
-                    />
+                <div className="flex items-center gap-4">
+                    <div className="relative h-30 w-30 shrink-0">
+                        <Image
+                            src="/assets/BitcoinTrans.png"
+                            alt="Bitcoin Trans"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
 
-                    <div className="flex flex-col items-start gap-2">
-                        <h2 className="font-line text-5xl font-semibold text-white tracking-[0.2em]">
+                    <div className="flex flex-col justify-center">
+                        <h2 className="text-5xl font-bold text-white tracking-[0.2em] leading-none">
                             {t.title}
                         </h2>
-                        <p className="text-5xl text-amber-500">
+                        <p className="text-5xl text-amber-500 leading-tight">
                             {t.subtitle}
                         </p>
                     </div>
                 </div>
 
                 {/* Description */}
-                <div className="mt-4 max-w-lg">
-                    <p className="font-line text-xl md:text-3xl text-white">
-                        {t.desc1}
-                        <span className="text-amber-500">
-                            {" "}Membership{" "}
-                        </span>
-                        {t.desc2}
+                <div className="mt-6 max-w-lg">
+                    <p className="text-lg md:text-2xl text-zinc-300 font-light leading-relaxed">
+                        {t.desc}
                     </p>
                 </div>
 
-                {/* Buttons */}
-                <div className="flex flex-col md:flex-row gap-4 mt-32 md:mt-14">
+                {/* Action Buttons */}
+                <div className="flex flex-col gap-3.5 mt-20 md:mt-12 max-w-sm">
 
-                    <div className="relative w-full md:w-56">
-                        <button
-                            type="button"
-                            className="w-full cursor-pointer rounded-xl
-                            bg-amber-500 p-4 text-2xl transition-all duration-500
-                            hover:scale-105 font-line"
-                            onClick={() => setIsOpen(true)}
-                        >
-                            {t.registerBtn}
-                        </button>
-                    </div>
+                    {/* Primary Button */}
+                    <button
+                        type="button"
+                        className="w-full cursor-pointer rounded-2xl bg-amber-500 py-4 text-lg md:text-xl font-bold text-black transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]"
+                        onClick={() => setIsOpen(true)}
+                    >
+                        {t.registerBtn}
+                    </button>
 
-                    {/* iOS / Android Split Button */}
-                    <div className="flex w-full md:w-64 border border-white rounded-xl text-white text-2xl backdrop-blur-2xl overflow-hidden divide-x divide-white/40">
+                    {/* Secondary Split Button (iOS/Android) */}
+                    <div className="flex w-full rounded-2xl border border-white/20 bg-white/5 text-white text-sm md:text-base backdrop-blur-md overflow-hidden divide-x divide-white/15">
                         <a
                             href="#"
-                            className="flex-1 py-4 text-center cursor-pointer transition-all duration-300 hover:bg-white hover:text-black font-line flex items-center justify-center gap-2"
+                            className="flex-1 py-3 text-center cursor-pointer transition-all duration-200 hover:bg-white/15 flex items-center justify-center gap-2 font-medium"
                         >
-                            <FaApple className="text-2xl" />
+                            <FaApple className="text-lg" />
                             {t.ios}
                         </a>
                         <a
                             href="#"
-                            className="flex-1 py-4 text-center cursor-pointer transition-all duration-300 hover:bg-white hover:text-black font-line flex items-center justify-center gap-2"
+                            className="flex-1 py-3 text-center cursor-pointer transition-all duration-200 hover:bg-white/15 flex items-center justify-center gap-2 font-medium"
                         >
-                            <FaAndroid className="text-2xl" />
+                            <FaAndroid className="text-lg" />
                             {t.android}
                         </a>
                     </div>
@@ -163,24 +153,20 @@ export default function FirstPanel() {
 
             </div>
 
-            {/* Glow Effects */}
+            {/* Footer Padding / Glow */}
+            <div className="relative z-30 pb-8" />
+
             <div
                 className="
-                    absolute right-10 top-80
-                    h-40 w-40
-                    animate-pulse
+                    pointer-events-none
+                    absolute right-0 top-1/3
+                    h-72 w-72
                     rounded-full
-                    blur-4xl
+                    blur-3xl
+                    opacity-50
                 "
                 style={{
-                    background: `
-                        radial-gradient(circle,
-                            rgba(251,191,36,0.45) 0%,
-                            rgba(251,191,36,0.22) 20%,
-                            rgba(251,191,36,0.10) 45%,
-                            rgba(251,191,36,0.03) 70%,
-                            transparent 100%)
-                    `,
+                    background: `radial-gradient(circle, rgba(251,191,36,0.3) 0%, transparent 70%)`,
                 }}
             />
 

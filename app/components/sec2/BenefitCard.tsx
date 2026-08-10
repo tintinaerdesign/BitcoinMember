@@ -179,7 +179,7 @@ export default function RewardSection() {
                                             mt-auto
                                             pt-6
                                             text-4xl
-                                            font-black
+                                            font-bold
                                             bg-gradient-to-r
                                             from-pink-500
                                             to-orange-400
