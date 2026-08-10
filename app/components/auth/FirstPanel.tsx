@@ -60,7 +60,7 @@ export default function FirstPanel() {
             />
 
             {/* --- Language Switcher --- */}
-            <div className="absolute top-6 right-6 md:top-10 md:right-12 z-40 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5 text-sm text-white">
+            <div className="absolute top-6 right-6 md:top-10 md:right-12 z-50 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-3 py-1.5 text-sm text-white">
                 <FaGlobe className="text-amber-500 text-base" />
                 <button
                     type="button"
