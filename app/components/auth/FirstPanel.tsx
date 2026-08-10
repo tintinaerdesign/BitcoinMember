@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import RegisterModal from "./RegisterModal";
+
+
 import { FaApple, FaAndroid, FaGlobe } from "react-icons/fa6";
 
 const content = {
@@ -54,45 +56,12 @@ export default function FirstPanel() {
             {/* Overlay Gradient */}
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/5 to-transparent" />
 
-            {/* --- Language Switcher --- */}
-            <div className="absolute top-6 right-6 md:top-8 md:right-12 z-50 flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/15 rounded-full px-3.5 py-1.5 text-xs md:text-sm text-white shadow-xl">
-                <FaGlobe className="text-amber-500 text-sm" />
-                <button
-                    type="button"
-                    onClick={() => setLang('th')}
-                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
-                        lang === 'th' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
-                    }`}
-                >
-                    TH
-                </button>
-                <span className="text-white/20">|</span>
-                <button
-                    type="button"
-                    onClick={() => setLang('en')}
-                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
-                        lang === 'en' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
-                    }`}
-                >
-                    EN
-                </button>
-                <span className="text-white/20">|</span>
-                <button
-                    type="button"
-                    onClick={() => setLang('zh')}
-                    className={`px-2 py-0.5 rounded-full cursor-pointer transition-all ${
-                        lang === 'zh' ? 'bg-amber-500 text-black font-bold' : 'text-zinc-400 hover:text-white'
-                    }`}
-                >
-                    中文
-                </button>
-            </div>
 
             {/* Main Content Area */}
             <div className="relative z-30 flex max-w-4xl flex-col px-6 md:px-16 pt-12 md:pt-36 my-12">
 
                 {/* Header */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1">
                     <div className="relative h-30 w-30 shrink-0">
                         <Image
                             src="/assets/BitcoinTrans.png"
