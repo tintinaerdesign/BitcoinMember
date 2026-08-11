@@ -66,7 +66,7 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
             <div className="relative z-30 flex max-w-4xl flex-col px-6 md:px-16 pt-12 md:pt-36 my-12">
 
                 {/* Header */}
-                <div className="flex items-center gap-1">
+                <div className="flex items-center">
                     <div className="relative h-30 w-30 shrink-0">
                         <Image
                             src="/assets/BitcoinTrans.png"
@@ -80,7 +80,7 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
                         <h2 className="text-5xl font-bold text-white tracking-[0.2em] leading-none">
                             {t.title}
                         </h2>
-                        <p className="text-5xl text-amber-500 leading-tight">
+                        <p className="text-4xl text-amber-500 leading-tight">
                             {t.subtitle}
                         </p>
                     </div>
@@ -93,13 +93,14 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
                     </p>
                 </div>
 
-                {/* Action Buttons */}
+                {/* Buttons */}
                 <div className="flex flex-col gap-3.5 mt-20 md:mt-12 max-w-sm">
 
-                    {/* Primary Button */}
+                    {/* Register Button */}
                     <button
                         type="button"
-                        className="w-full cursor-pointer rounded-2xl bg-amber-500 py-4 text-lg md:text-xl font-bold text-black transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]"
+                        className="w-full cursor-pointer rounded-2xl bg-amber-500 py-4 text-lg md:text-xl font-bold text-black
+                        transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]"
                         onClick={() => setIsOpen(true)}
                     >
                         {t.registerBtn}

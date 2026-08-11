@@ -99,10 +99,10 @@ const rewards = {
 
 const content = {
     th: {
-        badge: "สิทธิประโยชน์",
-        title1: "ซื้อ.",
-        title2: "รับ.",
-        title3: "รับสิทธิพิเศษมากขึ้น.",
+        badge: "Benefits",
+        title1: "Purchase.",
+        title2: "Scan.",
+        title3: "Get More Rewards.",
         description1: "เพียงซื้อสินค้าและบริการจากร้านค้าที่เข้าร่วมรายการกับ",
         description2: "รับแต้มสะสมเพื่อแลกเป็นสินค้าหรือสิทธิพิเศษ",
     },
