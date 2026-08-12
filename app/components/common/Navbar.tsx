@@ -174,7 +174,8 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
                     <button
                         type="button"
                         onClick={() => setIsOpen((prev) => !prev)}
-                        className="flex items-center justify-center text-white md:hidden cursor-pointer p-2"
+                        className="flex items-center justify-start text-white md:hidden cursor-pointer shrink-0
+                         p-2"
                         aria-label="Toggle menu"
                     >
                         <span className="material-symbols-outlined text-3xl">
