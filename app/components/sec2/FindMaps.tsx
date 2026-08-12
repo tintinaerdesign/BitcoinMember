@@ -413,14 +413,12 @@ export default function FindMaps({ lang }: FindMapsProps) {
                             {/* ================================================= */}
 
                             <div className="absolute bottom-5 left-5 right-5 rounded-2xl border
-                            border-white/10 bg-black/90 p-4 backdrop/blur-xl z-50
+                            border-white/10 bg-black/90 p-1 backdrop/blur-xl z-50
+                            md:p-4
                             ">
 
-                                <div className="
-                                    flex
-                                    items-center
-                                    justify-between
-                                ">
+                                <div className="flex items-center justify-between pr-3
+                                        md:pr-1">
 
                                     <div className="
                                         flex
@@ -470,6 +468,7 @@ export default function FindMaps({ lang }: FindMapsProps) {
                                             group-hover:-translate-y-1
                                             group-hover:translate-x-1
                                             group-hover:text-amber-500
+
                                         "
                                     />
 
