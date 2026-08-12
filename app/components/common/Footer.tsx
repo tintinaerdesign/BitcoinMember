@@ -254,7 +254,7 @@ export default function Footer({ lang }: Props) {
                                     onClick={() =>
                                         setIsOpenModal(true)
                                     }
-                                    className="block cursor-pointer trasition
+                                    className="block cursor-pointer transition
                                             hover:text-white">
                                     {t.membershipLinks[0]}
                                 </button>

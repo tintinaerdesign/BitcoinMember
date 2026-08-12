@@ -13,7 +13,7 @@ import RegisterModal from "@/app/components/auth/RegisterModal";
 import type { Language } from "@/app/page";
 
 interface NavbarProps {
-    isOpenModal: boolean;
+
     lang: Language;
     setLang: React.Dispatch<React.SetStateAction<Language>>;
 }
