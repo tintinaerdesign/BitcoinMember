@@ -305,22 +305,22 @@ export default function FindMaps({ lang }: FindMapsProps) {
                             {/* ================================================= */}
 
                             <MapPinMarker
-                                className="left-[17%] top-[25%]"
+                                className="left-[17%] top-[25%] z-10"
                                 delay={0}
                             />
 
                             <MapPinMarker
-                                className="left-[70%] top-[21%]"
+                                className="left-[70%] top-[21%] z-10"
                                 delay={0.15}
                             />
 
                             <MapPinMarker
-                                className="left-[77%] top-[60%]"
+                                className="left-[77%] top-[60%] z-10"
                                 delay={0.3}
                             />
 
                             <MapPinMarker
-                                className="left-[25%] top-[66%]"
+                                className="left-[25%] top-[66%] z-10"
                                 delay={0.45}
                             />
 
@@ -338,7 +338,7 @@ export default function FindMaps({ lang }: FindMapsProps) {
                                     repeat: Infinity,
                                     ease: "easeInOut",
                                 }}
-                                className="absolute left-1/2 top-1/2 z-20
+                                className="absolute left-1/2 top-1/2 z-50
                                     -translate-x-1/2
                                     -translate-y-1/2
                                 "
@@ -413,7 +413,7 @@ export default function FindMaps({ lang }: FindMapsProps) {
                             {/* ================================================= */}
 
                             <div className="absolute bottom-5 left-5 right-5 rounded-2xl border
-                            border-white/10 bg-black/70 p-4 backdrop/blur-xl
+                            border-white/10 bg-black/90 p-4 backdrop/blur-xl z-50
                             ">
 
                                 <div className="
