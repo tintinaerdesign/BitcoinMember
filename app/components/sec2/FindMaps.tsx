@@ -413,7 +413,7 @@ export default function FindMaps({ lang }: FindMapsProps) {
                             {/* ================================================= */}
 
                             <div className="absolute bottom-5 left-5 right-5 rounded-2xl border
-                            border-white/10 bg-black/90 p-1 backdrop/blur-xl z-50
+                            border-white/10 bg-black/90 p-1 backdrop/blur-xl z-40
                             md:p-4
                             ">
 
