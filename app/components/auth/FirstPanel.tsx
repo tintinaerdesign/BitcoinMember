@@ -41,7 +41,7 @@ const content = {
 };
 
 export default function FirstPanel({ lang }: FirstPanelProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     const t = content[lang];
 
@@ -54,8 +54,8 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
                 alt="Bitcoin Membership"
                 fill
                 priority
-                quality={90}
-                className="object-cover opacity-60"
+                quality={100}
+                className="object-cover opacity-70"
             />
 
             {/* Overlay Gradient */}
@@ -63,7 +63,7 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
 
 
             {/* Main Content Area */}
-            <div className="relative z-30 flex max-w-4xl flex-col px-6 md:px-16 pt-12 md:pt-36 my-12">
+            <div className="relative z-30 flex max-w-4xl flex-col px-6 md:px-36 pt-12 md:pt-36 my-12">
 
                 {/* Header */}
                 <div className="flex items-center">
@@ -101,7 +101,7 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
                         type="button"
                         className="w-full cursor-pointer rounded-2xl bg-amber-500 py-4 text-lg md:text-xl font-bold text-black
                         transition-all duration-300 hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]"
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => setIsOpenModal(true)}
                     >
                         {t.registerBtn}
                     </button>
@@ -146,8 +146,8 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
             />
 
             <RegisterModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
+                isOpenModal={isOpenModal}
+                onClose={() => setIsOpenModal(false)}
                 lang={lang}
             />
 

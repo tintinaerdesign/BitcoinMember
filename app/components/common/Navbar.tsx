@@ -8,10 +8,12 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGlobe } from "react-icons/fa6";
 import { ChevronDown } from "lucide-react";
+import RegisterModal from "@/app/components/auth/RegisterModal";
 
 import type { Language } from "@/app/page";
 
 interface NavbarProps {
+    isOpenModal: boolean;
     lang: Language;
     setLang: React.Dispatch<React.SetStateAction<Language>>;
 }
@@ -46,6 +48,7 @@ const navLang = {
 export default function Navbar({ lang, setLang }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const dropdownRef = useRef<HTMLElement | null>(null);
+    const [isOpenModal, setIsOpenModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
     const t = navLang[lang];
@@ -62,6 +65,7 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
     }, []);
 
     return (
+        <>
         <motion.nav
             ref={dropdownRef}
             initial={{ opacity: 0, y: -60 }}
@@ -192,10 +196,10 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
                             rounded-b-xl
                             border-t border-white/10
                             bg-[#0f0f0f]/95 backdrop-blur-xl
-                            md:hidden
+                            md:hidden p-6
                         "
                     >
-                        <ul className="flex flex-col space-y-4 p-6 mb-3">
+                        <ul className="flex flex-col space-y-4">
                             <li>
                                 <Link
                                     href="/"
@@ -234,20 +238,26 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
                                     {t.ranking}
                                 </Link>
                             </li>
-                            <li className="mt-3">
-                                {/* Register Button */}
-                                <Link
-                                    href="/register"
-                                    className="text-black transition-all px-12 py-2 bg-amber-500
-                                    hover:shadow-lg hover:bg-amber-400 font-semibold
-                                    text-lg active:scale-[0.98] rounded-xl">
-                                    {t.register}
-                                </Link>
-                            </li>
                         </ul>
+                        {/* Register Button */}
+                        <button
+                            type="button"
+                            className="w-48 py-3 flex items-center justify-center cursor-pointer rounded-2xl bg-amber-500 mt-3
+                            font-bold text-black transition-all duration-300 hover:bg-amber-400 text-lg md:text-xl
+                            hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]"
+                            onClick={() => setIsOpenModal(true)}
+                        >
+                            {t.register}
+                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>
+
         </motion.nav>
+            <RegisterModal isOpenModal={isOpenModal}
+                           onClose={() => setIsOpenModal(false)}
+                           lang={lang}
+            />
+    </>
     );
 }
