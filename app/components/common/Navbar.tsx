@@ -83,7 +83,7 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
             <div className="flex items-center justify-between py-3 px-4 md:px-8">
 
                 {/* 1. Logo (แสดงผลทั้ง Mobile และ Desktop) */}
-                <div className="relative h-18 w-40 shrink-0">
+                <div className="relative h-9 w-20 md:h-18 md:w-40 shrink-0">
                     <Image
                         src="/assets/Logo.png"
                         alt="Logo"
