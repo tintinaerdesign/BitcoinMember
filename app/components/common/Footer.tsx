@@ -178,29 +178,14 @@ export default function Footer({ lang }: Props) {
 
                         {/* BRAND */}
                         <div className="flex items-center">
-
-                            <div className="relative h-20 w-20 shrink-0
-                                        md:h-24 md:w-24">
+                            <div className="relative h-24 w-60 shrink-0">
                                 <Image
-                                    src="/assets/BitcoinTrans.png"
-                                    alt="Bitcoin Membership"
+                                    src="/assets/Logo.png"
+                                    alt="Logo"
                                     fill
                                     className="object-contain"
                                 />
                             </div>
-
-                            <div className=" ml-3 flex flex-col justify-center">
-                                <h2 className="text-3xl font-bold leading-none tracking-[0.08em] text-white
-                                md:text-4xl">
-                                    {t.brandTitle}
-                                </h2>
-
-                                <p className="mt-1 text-2xl leading-tight text-amber-500 md:text-3xl">
-                                    {t.brandSubtitle}
-                                </p>
-
-                            </div>
-
                         </div>
 
 

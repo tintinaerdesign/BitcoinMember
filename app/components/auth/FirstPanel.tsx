@@ -67,27 +67,18 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
 
                 {/* Header */}
                 <div className="flex items-center">
-                    <div className="relative h-30 w-30 shrink-0">
+                    <div className="relative h-36 w-80 shrink-0">
                         <Image
-                            src="/assets/BitcoinTrans.png"
-                            alt="Bitcoin Trans"
+                            src="/assets/Logo.png"
+                            alt="Logo"
                             fill
                             className="object-contain"
                         />
                     </div>
-
-                    <div className="flex flex-col justify-center">
-                        <h2 className="text-5xl font-bold text-white tracking-[0.2em] leading-none">
-                            {t.title}
-                        </h2>
-                        <p className="text-4xl text-amber-500 leading-tight">
-                            {t.subtitle}
-                        </p>
-                    </div>
                 </div>
 
                 {/* Description */}
-                <div className="mt-6 max-w-lg">
+                <div className="max-w-lg">
                     <p className="text-lg md:text-2xl text-zinc-300 font-light leading-relaxed">
                         {t.desc}
                     </p>

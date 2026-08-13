@@ -83,24 +83,14 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
             <div className="flex items-center justify-between py-3 px-4 md:px-8">
 
                 {/* 1. Logo (แสดงผลทั้ง Mobile และ Desktop) */}
-                <Link href="/" className="flex items-center gap-2 shrink-0">
-                    <div className="relative h-10 w-10 md:h-12 md:w-12 shrink-0">
-                        <Image
-                            src="/assets/BitcoinTrans.png"
-                            alt="Bitcoin Trans"
-                            fill
-                            className="object-contain"
-                        />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                        <h2 className="text-lg md:text-xl font-bold text-white tracking-[0.15em] leading-none">
-                            Bitcoin
-                        </h2>
-                        <p className="text-xs md:text-sm text-amber-500 leading-tight">
-                            Membership
-                        </p>
-                    </div>
-                </Link>
+                <div className="relative h-18 w-40 shrink-0">
+                    <Image
+                        src="/assets/Logo.png"
+                        alt="Logo"
+                        fill
+                        className="object-contain"
+                    />
+                </div>
 
                 {/* 2. Desktop Navigation Links (แสดงเฉพาะจอใหญ่ mdขึ้นไป) */}
                 <div className="hidden md:flex items-center gap-8">
