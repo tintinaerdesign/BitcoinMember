@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
     ArrowLeft,
     Link2,
-    MessageCircle,
     Phone,
     ShieldCheck,
     Store,
@@ -44,6 +43,7 @@ const modalContent = {
         phonePlaceholder: "กรอกเบอร์โทรศัพท์ (เช่น 0812345678)",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
+        paymentChannel: "ช่องทางการรับเงิน",
         onchainLabel: "Bitcoin Address",
         lightningLabel: "Lightning Address",
         onchainPlaceholder: "bc1q... Bitcoin receiving address",
@@ -52,8 +52,8 @@ const modalContent = {
             "ห้ามกรอก Private Key เด็ดขาด — ช่องนี้ใช้สำหรับข้อมูลปลายทางรับเงินเท่านั้น เราไม่มีสิทธิ์เข้าถึงเงินของคุณ",
         bitcoinAddressError: "กรุณากรอก Bitcoin Address ที่ถูกต้อง",
         lightningAddressError: "กรุณากรอก Lightning Address ที่ถูกต้อง",
-        lineLogin: "ดำเนินการต่อด้วย LINE",
-        lineOAuthPending: "กำลังเชื่อมต่อ LINE Login — ยังไม่ได้เปิดใช้งาน OAuth",
+        continueBtn: "ดำเนินการต่อ",
+        userRegistered: "สมัครสมาชิกสำเร็จ",
         terms: "การสมัครสมาชิกแสดงว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัว",
         closeBtn: "ปิดหน้าต่าง",
         phoneError: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ 10 หลัก",
@@ -90,6 +90,7 @@ const modalContent = {
         phonePlaceholder: "Enter mobile number",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
+        paymentChannel: "Payment receiving channel",
         onchainLabel: "Bitcoin Address",
         lightningLabel: "Lightning Address",
         onchainPlaceholder: "bc1q... Bitcoin receiving address",
@@ -98,8 +99,8 @@ const modalContent = {
             "Never enter your Private Key — this field is only for your receiving address. We cannot access your funds.",
         bitcoinAddressError: "Please enter a valid Bitcoin address",
         lightningAddressError: "Please enter a valid Lightning address",
-        lineLogin: "Continue with LINE",
-        lineOAuthPending: "Connecting LINE Login — OAuth is not enabled yet",
+        continueBtn: "Continue",
+        userRegistered: "Registration successful",
         terms: "By joining, you agree to our Terms and Privacy Policy.",
         closeBtn: "Close modal",
         phoneError: "Please enter a complete 10-digit phone number.",
@@ -136,6 +137,7 @@ const modalContent = {
         phonePlaceholder: "请输入手机号码",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
+        paymentChannel: "收款方式",
         onchainLabel: "Bitcoin Address",
         lightningLabel: "Lightning Address",
         onchainPlaceholder: "bc1q... Bitcoin receiving address",
@@ -144,8 +146,8 @@ const modalContent = {
             "请勿输入私钥 — 此栏仅用于填写您的收款地址，我们无法访问您的资金。",
         bitcoinAddressError: "请输入有效的比特币收款地址",
         lightningAddressError: "请输入有效的闪电地址",
-        lineLogin: "使用 LINE 继续",
-        lineOAuthPending: "正在连接 LINE 登录 — OAuth 尚未启用",
+        continueBtn: "继续",
+        userRegistered: "注册成功",
         terms: "注册即表示您同意我们的条款和隐私政策。",
         closeBtn: "关闭窗口",
         phoneError: "请输入完整的 10 位手机号码。",
@@ -386,7 +388,14 @@ export default function RegisterModal({
 
             setPhoneVerified(true);
             setOtp(["", "", "", "", "", ""]);
-            await registerMerchant();
+
+            if (userType === "store") {
+                await registerMerchant();
+                return;
+            }
+
+            setStatusMessage(t.userRegistered);
+            window.setTimeout(() => handleClose(), 1200);
         } catch {
             setError(t.verifyOtpError);
         } finally {
@@ -450,16 +459,26 @@ export default function RegisterModal({
         }
     };
 
-    // TODO: Replace with real LINE Login OAuth (LINE Login / LIFF).
-    const handleLineLogin = () => {
+    const handleGeneralPhoneSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         setError("");
-        setStatusMessage(t.lineOAuthPending);
+
+        if (phone.length !== 10) {
+            setError(t.phoneError);
+            return;
+        }
+
+        if (!/^0\d{9}$/.test(phone)) {
+            setError(t.phoneFormatError);
+            return;
+        }
+
+        await requestSendOtp();
     };
 
     if (!isOpenModal) return null;
 
-    const viewKey =
-        userType === "general" ? "general" : `merchant-${merchantStep}`;
+    const viewKey = `${userType}-${merchantStep}`;
 
     return (
         <div
@@ -513,27 +532,41 @@ export default function RegisterModal({
                     )}
 
                     <AnimatePresence mode="wait">
-                        {userType === "general" && (
+                        {userType === "general" && merchantStep === "phone" && (
                             <motion.div
                                 key={viewKey}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                             >
-                                <button
-                                    type="button"
-                                    onClick={handleLineLogin}
-                                    className="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-[#06C755] py-4 text-lg font-bold text-white transition-all hover:bg-[#05b34c] active:scale-[0.99]"
-                                >
-                                    <MessageCircle size={21} />
-                                    {t.lineLogin}
-                                </button>
+                                <form onSubmit={handleGeneralPhoneSubmit}>
+                                    <div className="relative">
+                                        <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            type="tel"
+                                            required
+                                            inputMode="numeric"
+                                            maxLength={10}
+                                            value={phone}
+                                            onChange={handleMerchantPhoneChange}
+                                            placeholder={t.phonePlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
+                                        />
+                                    </div>
 
-                                {statusMessage && (
-                                    <p className="mt-4 text-center text-sm text-zinc-400">
-                                        {statusMessage}
-                                    </p>
-                                )}
+                                    {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+                                    {statusMessage && (
+                                        <p className="mt-2 text-sm text-emerald-400">{statusMessage}</p>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSendingOtp}
+                                        className="mt-6 mb-4 w-full cursor-pointer rounded-xl bg-amber-500 py-4 text-lg font-bold text-black shadow-lg shadow-amber-500/10 transition-all hover:bg-amber-400 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+                                    >
+                                        {isSendingOtp ? t.sendingOtp : t.continueBtn}
+                                    </button>
+                                </form>
 
                                 <p className="mt-6 px-2 text-center text-xs leading-relaxed text-zinc-300">
                                     {t.terms}
@@ -549,6 +582,22 @@ export default function RegisterModal({
                                 exit={{ opacity: 0, x: -20 }}
                             >
                                 <form onSubmit={handleMerchantPhoneSubmit}>
+                                    <div className="relative mb-5">
+                                        <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            type="tel"
+                                            required
+                                            inputMode="numeric"
+                                            maxLength={10}
+                                            value={phone}
+                                            onChange={handleMerchantPhoneChange}
+                                            placeholder={t.phonePlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
+                                        />
+                                    </div>
+
+                                    <p className="mb-2 text-sm font-semibold text-zinc-200">{t.paymentChannel}</p>
+
                                     <div className="mb-5 flex rounded-lg border border-white/10 bg-black/30 p-0.5">
                                         <button
                                             type="button"
@@ -566,20 +615,6 @@ export default function RegisterModal({
                                             <Zap size={14} />
                                             {t.lightningTab}
                                         </button>
-                                    </div>
-
-                                    <div className="relative mb-5">
-                                        <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
-                                        <input
-                                            type="tel"
-                                            required
-                                            inputMode="numeric"
-                                            maxLength={10}
-                                            value={phone}
-                                            onChange={handleMerchantPhoneChange}
-                                            placeholder={t.phonePlaceholder}
-                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
-                                        />
                                     </div>
 
                                     <div className="mb-5">
@@ -638,7 +673,7 @@ export default function RegisterModal({
                             </motion.div>
                         )}
 
-                        {userType === "store" && merchantStep === "otp" && (
+                        {merchantStep === "otp" && (
                             <motion.div
                                 key={viewKey}
                                 initial={{ opacity: 0, x: 20 }}
