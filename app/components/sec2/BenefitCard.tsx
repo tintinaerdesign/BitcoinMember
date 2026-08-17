@@ -25,8 +25,8 @@ const rewards = {
                 "รับแต้มสะสมเพิ่มขึ้นเมื่อชำระผ่านไลท์นิ่งเน็ตเวิร์ค",
         },
         {
-            title: "Daily Impact",
-            value: "Earned, Not Minted",
+            title: "Earned, Not Minted",
+            value: "Non-Inflationary LP",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
             description:
@@ -45,14 +45,14 @@ const rewards = {
     en: [
         {
             title: "Lightning purchasing",
-            value: "+1 LP",
+            value: "Non-Inflationary LP",
             icon: Zap,
             color: "from-orange-400 to-yellow-400",
             description:
                 "Earn extra points when you pay with the Lightning Network.",
         },
         {
-            title: "Daily Impact",
+            title: "Earned, Not Minted",
             value: "Earned, Not Minted",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
@@ -79,8 +79,8 @@ const rewards = {
                 "使用 Lightning Network 支付即可获得额外积分。",
         },
         {
-            title: "每日奖励",
-            value: "赚取，而非铸造",
+            title: "赚取，而非铸造",
+            value: "非通胀型 LP",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
             description:
