@@ -18,7 +18,7 @@ const rewards = {
     th: [
         {
             title: "Lightning purchasing",
-            value: "+50 CP",
+            value: "+1 LP",
             icon: Zap,
             color: "from-orange-400 to-yellow-400",
             description:
@@ -26,11 +26,11 @@ const rewards = {
         },
         {
             title: "Daily Impact",
-            value: "+250 CP",
+            value: "Earned, Not Minted",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
             description:
-                "เมื่อซื้อสินค้าตั้งแต่ 3 ครั้งขึ้นไปใน 1 วัน รับแต้มเพิ่มแบบจุกๆ",
+                "LP จะได้รับผ่านการชำระบน Lightning Network เท่านั้น",
         },
         {
             title: "Special Meetup",
@@ -45,7 +45,7 @@ const rewards = {
     en: [
         {
             title: "Lightning purchasing",
-            value: "+50 CP",
+            value: "+1 LP",
             icon: Zap,
             color: "from-orange-400 to-yellow-400",
             description:
@@ -53,11 +53,11 @@ const rewards = {
         },
         {
             title: "Daily Impact",
-            value: "+250 CP",
+            value: "Earned, Not Minted",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
             description:
-                "Make 3 or more purchases in a day and earn a bonus.",
+                "LP is earned exclusively through payments made on the Lightning Network.",
         },
         {
             title: "Special Meetup",
@@ -72,7 +72,7 @@ const rewards = {
     zh: [
         {
             title: "Lightning 支付",
-            value: "+50 CP",
+            value: "+1 LP",
             icon: Zap,
             color: "from-orange-400 to-yellow-400",
             description:
@@ -80,11 +80,11 @@ const rewards = {
         },
         {
             title: "每日奖励",
-            value: "+250 CP",
+            value: "赚取，而非铸造",
             icon: Gift,
             color: "from-violet-500 to-pink-500",
             description:
-                "一天内消费 3 次或以上，即可获得额外奖励积分。",
+                "LP 仅通过闪电网络支付获得。",
         },
         {
             title: "特别活动",
