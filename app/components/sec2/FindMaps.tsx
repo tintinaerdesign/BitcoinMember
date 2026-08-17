@@ -23,7 +23,7 @@ const content = {
         title1: "Explore",
         title2: "Merchant Nearby.",
         description:
-            "ค้นหาร้านค้าที่เข้าร่วม Bitcoin Membership ใกล้คุณ ใช้จ่ายและรับแต้มสะสมได้ทันที",
+            "ค้นหาร้านค้าที่เข้าร่วม Bitcoin Member ใกล้คุณ ใช้จ่ายและรับแต้มสะสมได้ทันที",
         explore: "ค้นหาร้านค้าใกล้คุณ",
         location: "Your Location",
         merchant: "Bitcoin Merchant",

@@ -38,7 +38,7 @@ const rewards = {
             icon: Users,
             color: "from-pink-500 to-orange-400",
             description:
-                "เข้าร่วมกิจกรรมพิเศษสำหรับสมาชิก Bitcoin Membership",
+                "เข้าร่วมกิจกรรมพิเศษสำหรับสมาชิก Bitcoin Member",
         },
     ],
 
@@ -65,7 +65,7 @@ const rewards = {
             icon: Users,
             color: "from-pink-500 to-orange-400",
             description:
-                "Join exclusive events created for Bitcoin Membership members.",
+                "Join exclusive events created for Bitcoin Member members.",
         },
     ],
 
@@ -92,7 +92,7 @@ const rewards = {
             icon: Users,
             color: "from-pink-500 to-orange-400",
             description:
-                "参加专为 Bitcoin Membership 会员举办的特别活动。",
+                "参加专为 Bitcoin Member 会员举办的特别活动。",
         },
     ],
 };
@@ -124,7 +124,7 @@ const content = {
         title2: "赚取.",
         title3: "享受更多权益.",
         description1:
-            "在参与 Bitcoin Membership 的商家购买商品和服务，",
+            "在参与 Bitcoin Member 的商家购买商品和服务，",
         description2:
             "即可累积积分并兑换商品或专属权益。",
     },

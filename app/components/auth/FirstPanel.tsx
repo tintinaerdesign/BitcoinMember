@@ -16,15 +16,15 @@ interface FirstPanelProps {
 const content = {
     th: {
         title: "Bitcoin",
-        subtitle: "Membership",
-        desc: "สะสมแต้มและรับสิทธิพิเศษมากมาย กับร้านค้าที่เข้าร่วมรายการกับ Bitcoin Membership",
+        subtitle: "Member",
+        desc: "สะสมแต้มและรับสิทธิพิเศษมากมาย กับร้านค้าที่เข้าร่วมรายการกับ Bitcoin Member",
         registerBtn: "สมัครสมาชิก",
         ios: "iOS",
         android: "Android"
     },
     en: {
         title: "Bitcoin",
-        subtitle: "Membership",
+        subtitle: "Member",
         desc: "Collect points and unlock exclusive privileges at participating merchants.",
         registerBtn: "Register Now",
         ios: "iOS",
@@ -32,7 +32,7 @@ const content = {
     },
     zh: {
         title: "Bitcoin",
-        subtitle: "Membership",
+        subtitle: "Member",
         desc: "在合作商家累积积分并享受专属特权",
         registerBtn: "立即注册",
         ios: "iOS",
@@ -51,7 +51,7 @@ export default function FirstPanel({ lang }: FirstPanelProps) {
             {/* Background */}
             <Image
                 src="/assets/BitcoinMember.png"
-                alt="Bitcoin Membership"
+                alt="Bitcoin Member"
                 fill
                 priority
                 quality={100}

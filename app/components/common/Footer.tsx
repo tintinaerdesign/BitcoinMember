@@ -18,10 +18,10 @@ interface Props {
 const footerContent = {
     th: {
         brandTitle: "Bitcoin",
-        brandSubtitle: "Membership",
+        brandSubtitle: "Member",
 
         description:
-            "ใช้ Bitcoin ในชีวิตประจำวัน ค้นหาร้านค้าที่เข้าร่วม สะสมแต้ม และรับสิทธิพิเศษจาก Bitcoin Membership",
+            "ใช้ Bitcoin ในชีวิตประจำวัน ค้นหาร้านค้าที่เข้าร่วม สะสมแต้ม และรับสิทธิพิเศษจาก Bitcoin Member",
 
         tags: [
             "Bitcoin",
@@ -55,15 +55,15 @@ const footerContent = {
         ],
 
         copyright:
-            "© 2026 Bitcoin Membership. All rights reserved.",
+            "© 2026 Bitcoin Member. All rights reserved.",
 
         disclaimer:
-            "Bitcoin Membership เป็นแพลตฟอร์มสำหรับสมาชิกและร้านค้าที่รองรับ Bitcoin ข้อมูลบนเว็บไซต์มีไว้เพื่อการให้ข้อมูลและการใช้งานบริการเท่านั้น",
+            "Bitcoin Member เป็นแพลตฟอร์มสำหรับสมาชิกและร้านค้าที่รองรับ Bitcoin ข้อมูลบนเว็บไซต์มีไว้เพื่อการให้ข้อมูลและการใช้งานบริการเท่านั้น",
     },
 
     en: {
         brandTitle: "Bitcoin",
-        brandSubtitle: "Membership",
+        brandSubtitle: "Member",
 
         description:
             "Use Bitcoin in everyday life, discover participating merchants, earn points, and unlock exclusive Bitcoin Membership benefits.",

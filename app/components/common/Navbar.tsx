@@ -127,8 +127,9 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
                 {/* Language Switcher + Mobile Hamburger Button */}
                 <div className="flex items-center gap-3">
                     {/* Language Switcher */}
-                    <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/15 rounded-full px-2.5 py-1 text-xs text-white shadow-xl">
-                        <FaGlobe className="text-amber-500 text-xs shrink-0" />
+                    <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/15 rounded-full px-2.5 py-1 text-sm md:text-md md:py-3 text-white shadow-xl
+                    ">
+                        <FaGlobe className="text-amber-500 text-xs md:text-lg shrink-0" />
                         <button
                             type="button"
                             onClick={() => setLang('th')}
