@@ -56,6 +56,7 @@ const modalContent = {
         userRegistered: "สมัครสมาชิกสำเร็จ",
         terms: "การสมัครสมาชิกแสดงว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัว",
         closeBtn: "ปิดหน้าต่าง",
+        close: "ปิด",
         phoneError: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ 10 หลัก",
         phoneFormatError: "กรุณากรอกเบอร์โทรศัพท์ไทยให้ถูกต้อง",
         sendOtpBtn: "ส่งรหัส OTP",
@@ -103,6 +104,7 @@ const modalContent = {
         userRegistered: "Registration successful",
         terms: "By joining, you agree to our Terms and Privacy Policy.",
         closeBtn: "Close modal",
+        close: "Close",
         phoneError: "Please enter a complete 10-digit phone number.",
         phoneFormatError: "Please enter a valid Thai phone number.",
         sendOtpBtn: "Send OTP",
@@ -150,6 +152,7 @@ const modalContent = {
         userRegistered: "注册成功",
         terms: "注册即表示您同意我们的条款和隐私政策。",
         closeBtn: "关闭窗口",
+        close: "关闭",
         phoneError: "请输入完整的 10 位手机号码。",
         phoneFormatError: "请输入正确的泰国手机号码。",
         sendOtpBtn: "发送验证码",
@@ -482,35 +485,39 @@ export default function RegisterModal({
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 backdrop-blur-md font-line"
+            className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/80 px-3 py-4 backdrop-blur-md font-line sm:px-4 sm:py-6"
             onClick={handleClose}
         >
+            <div className="flex min-h-full items-start justify-center sm:items-center">
             <div
-                className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/20 bg-[#171717] p-6 text-white shadow-2xl md:p-8"
+                className="relative my-auto flex w-full max-w-md max-h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[28px] border border-white/20 bg-[#171717] text-white shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="pointer-events-none absolute -right-20 -top-20 z-0 h-44 w-44 rounded-full bg-amber-500/15 blur-[80px]" />
 
-                <button
-                    type="button"
-                    onClick={handleClose}
-                    aria-label={t.closeBtn}
-                    className="absolute right-5 top-5 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-zinc-300 transition-all hover:bg-white/20 hover:text-white"
-                >
-                    <X size={22} />
-                </button>
+                <div className="sticky top-0 z-30 flex shrink-0 items-center justify-end bg-[#171717]/95 px-4 pt-3 pb-2 backdrop-blur-sm">
+                    <button
+                        type="button"
+                        onClick={handleClose}
+                        aria-label={t.closeBtn}
+                        className="flex h-11 min-w-11 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-white/10 px-3 text-sm font-semibold text-zinc-200 transition-all hover:bg-white/20 hover:text-white"
+                    >
+                        <X size={18} />
+                        {t.close}
+                    </button>
+                </div>
 
-                <div className="relative z-10">
+                <div className="relative z-10 min-h-0 flex-1 overflow-y-auto px-5 pb-5 md:px-8 md:pb-8">
                     {merchantStep !== "otp" && (
                         <>
-                            <div className="mb-6 text-center">
-                                <h3 className="text-3xl font-bold text-amber-500">{t.title}</h3>
-                                <p className="mt-2 text-[15px] leading-relaxed text-zinc-300">
+                            <div className="mb-4 pr-2 text-center md:mb-6">
+                                <h3 className="text-2xl font-bold text-amber-500 md:text-3xl">{t.title}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-zinc-300 md:text-[15px]">
                                     {t.subtitle}
                                 </p>
                             </div>
 
-                            <div className="mb-5 flex rounded-xl border border-white/10 bg-black/40 p-1">
+                            <div className="mb-4 flex rounded-xl border border-white/10 bg-black/40 p-1 md:mb-5">
                                 <button
                                     type="button"
                                     onClick={() => switchUserType("general")}
@@ -582,7 +589,7 @@ export default function RegisterModal({
                                 exit={{ opacity: 0, x: -20 }}
                             >
                                 <form onSubmit={handleMerchantPhoneSubmit}>
-                                    <div className="relative mb-5">
+                                    <div className="relative mb-4">
                                         <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
                                         <input
                                             type="tel"
@@ -592,13 +599,13 @@ export default function RegisterModal({
                                             value={phone}
                                             onChange={handleMerchantPhoneChange}
                                             placeholder={t.phonePlaceholder}
-                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-3 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 md:py-4"
                                         />
                                     </div>
 
                                     <p className="mb-2 text-sm font-semibold text-zinc-200">{t.paymentChannel}</p>
 
-                                    <div className="mb-5 flex rounded-lg border border-white/10 bg-black/30 p-0.5">
+                                    <div className="mb-4 flex rounded-lg border border-white/10 bg-black/30 p-0.5">
                                         <button
                                             type="button"
                                             onClick={() => resetMerchantPaymentFields("onchain")}
@@ -617,7 +624,7 @@ export default function RegisterModal({
                                         </button>
                                     </div>
 
-                                    <div className="mb-5">
+                                    <div className="mb-4">
                                         <label htmlFor="merchant-payment-address" className="mb-1.5 block text-sm font-medium text-zinc-300">
                                             {paymentNetwork === "onchain" ? t.onchainLabel : t.lightningLabel}
                                         </label>
@@ -646,7 +653,7 @@ export default function RegisterModal({
                                         </div>
                                     </div>
 
-                                    <div className="mb-6 flex items-start gap-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3">
+                                    <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 md:px-4 md:py-3">
                                         <ShieldCheck size={18} className="mt-0.5 shrink-0 text-amber-400" />
                                         <p className="text-sm leading-relaxed text-amber-200">
                                             {t.securityWarning}
@@ -661,13 +668,13 @@ export default function RegisterModal({
                                     <button
                                         type="submit"
                                         disabled={isSendingOtp || isRegistering}
-                                        className="mb-4 w-full cursor-pointer rounded-xl bg-amber-500 py-4 text-lg font-bold text-black shadow-lg shadow-amber-500/10 transition-all hover:bg-amber-400 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+                                        className="mb-3 w-full cursor-pointer rounded-xl bg-amber-500 py-3.5 text-lg font-bold text-black shadow-lg shadow-amber-500/10 transition-all hover:bg-amber-400 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 md:mb-4 md:py-4"
                                     >
                                         {isSendingOtp ? t.sendingOtp : t.storeContinueBtn}
                                     </button>
                                 </form>
 
-                                <p className="mt-6 px-2 text-center text-xs leading-relaxed text-zinc-300">
+                                <p className="mt-3 px-2 text-center text-xs leading-relaxed text-zinc-300 md:mt-6">
                                     {t.terms}
                                 </p>
                             </motion.div>
@@ -755,6 +762,7 @@ export default function RegisterModal({
                         )}
                     </AnimatePresence>
                 </div>
+            </div>
             </div>
         </div>
     );
