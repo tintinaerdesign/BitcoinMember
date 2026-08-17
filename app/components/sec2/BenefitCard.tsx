@@ -300,7 +300,7 @@ export default function BenefitSection({
                                         className="
                                             mt-auto
                                             pt-6
-                                            text-4xl
+                                            text-2xl
                                             font-bold
                                             bg-gradient-to-r
                                             from-pink-500
