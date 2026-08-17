@@ -138,7 +138,7 @@ export default function BenefitSection({
     const currentRewards = rewards[lang];
 
     return (
-        <section className="relative bg-black overflow-hidden">
+        <section id="rewards" className="relative scroll-mt-28 bg-black overflow-hidden">
 
             {/* Glow */}
             <div className="absolute left-0 top-10 h-80 w-80 rounded-full bg-pink-500/10 blur-[120px]" />
@@ -193,7 +193,7 @@ export default function BenefitSection({
                         {t.description1}
 
                         <span className="bg-amber-500 bg-clip-text text-transparent">
-                            {" "}Bitcoin Membership{" "}
+                            {" "}Bitcoin Member{" "}
                         </span>
 
                         <br />

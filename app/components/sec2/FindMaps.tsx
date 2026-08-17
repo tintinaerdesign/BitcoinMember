@@ -35,7 +35,7 @@ const content = {
         title1: "Explore",
         title2: "Merchant Nearby.",
         description:
-            "Find nearby merchants where you can pay with Bitcoin and earn rewards.",
+            "Find nearby Bitcoin Member merchants, spend, and earn points right away.",
         explore: "Explore Bitcoin Map",
         location: "Your Location",
         merchant: "Bitcoin Merchant",
@@ -47,7 +47,7 @@ const content = {
         title1: "探索",
         title2: "附近商家.",
         description:
-            "寻找附近参与 Bitcoin Membership 的商家，使用 Bitcoin 支付并立即赚取积分",
+            "寻找附近参与 Bitcoin Member 的商家，使用 Bitcoin 支付并立即赚取积分",
         explore: "探索 Bitcoin 地图",
         location: "你的位置",
         merchant: "Bitcoin 商家",

@@ -6,6 +6,7 @@ import BenefitCard from "@/app/components/sec2/BenefitCard";
 import Navbar from "@/app/components/common/Navbar";
 import Footer from "@/app/components/common/Footer";
 import FindMaps from "@/app/components/sec2/FindMaps";
+import LearnBitcoin from "@/app/components/sec2/LearnBitcoin";
 
 export type Language = "th" | "en" | "zh";
 
@@ -21,6 +22,8 @@ export default function Page() {
             <BenefitCard lang={lang} />
 
             <FindMaps lang={lang} />
+
+            <LearnBitcoin lang={lang} />
 
             <Footer lang={lang} />
         </main>

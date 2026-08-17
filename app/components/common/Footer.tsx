@@ -66,7 +66,7 @@ const footerContent = {
         brandSubtitle: "Member",
 
         description:
-            "Use Bitcoin in everyday life, discover participating merchants, earn points, and unlock exclusive Bitcoin Membership benefits.",
+            "Use Bitcoin in everyday life, find participating shops, earn points, and unlock special Bitcoin Member benefits.",
 
         tags: [
             "Bitcoin",
@@ -92,25 +92,25 @@ const footerContent = {
 
         support: "Support",
         supportLinks: [
-            "How It Works",
+            "How to use",
             "FAQ",
-            "About Us",
-            "Contact",
+            "About us",
+            "Contact us",
         ],
 
         copyright:
-            "© 2026 Bitcoin Membership. All rights reserved.",
+            "© 2026 Bitcoin Member. All rights reserved.",
 
         disclaimer:
-            "Bitcoin Membership is a platform for members and merchants using Bitcoin. Website content is provided for informational and service purposes only.",
+            "Bitcoin Member is a platform for members and merchants that accept Bitcoin. Website content is for information and using the service only.",
     },
 
     zh: {
         brandTitle: "Bitcoin",
-        brandSubtitle: "Membership",
+        brandSubtitle: "Member",
 
         description:
-            "使用 Bitcoin 进行日常消费，探索参与商家，赚取积分并享受 Bitcoin Membership 专属权益。",
+            "使用 Bitcoin 进行日常消费，探索参与商家，赚取积分并享受 Bitcoin Member 专属权益。",
 
         tags: [
             "Bitcoin",
@@ -143,10 +143,10 @@ const footerContent = {
         ],
 
         copyright:
-            "© 2026 Bitcoin Membership. All rights reserved.",
+            "© 2026 Bitcoin Member. All rights reserved.",
 
         disclaimer:
-            "Bitcoin Membership 是一个面向会员和 Bitcoin 商家的平台。本网站内容仅用于信息和服务用途。",
+            "Bitcoin Member 是面向会员和接受 Bitcoin 商家的平台。本网站内容仅用于信息和使用服务。",
     },
 };
 
@@ -270,7 +270,7 @@ export default function Footer({ lang }: Props) {
                                 {/* Rewards */}
 
                                 <a
-                                    href="#rewards"
+                                    href="/#rewards"
                                     className="block transition
                                             hover:text-white">
                                     {t.membershipLinks[3]}
@@ -289,21 +289,21 @@ export default function Footer({ lang }: Props) {
                             <div className="space-y-4 text-sm text-zinc-400">
 
                                 <a
-                                    href="#bitcoin"
+                                    href="/#bitcoin"
                                     className="block transition hover:text-white">
                                     {t.bitcoinLinks[0]}
                                 </a>
 
 
                                 <a
-                                    href="#lightning"
+                                    href="/#lightning"
                                     className="block transition hover:text-white">
                                     {t.bitcoinLinks[1]}
                                 </a>
 
 
                                 <a
-                                    href="#payment"
+                                    href="/#payment"
                                     className="block transition hover:text-white">
                                     {t.bitcoinLinks[2]}
                                 </a>
@@ -329,32 +329,32 @@ export default function Footer({ lang }: Props) {
 
                             <div className="space-y-4 text-sm text-zinc-400">
 
-                                <a
-                                    href="#how-it-works"
+                                <Link
+                                    href="/support#how-to-use"
                                     className="block transition hover:text-white">
                                     {t.supportLinks[0]}
-                                </a>
+                                </Link>
 
 
-                                <a
-                                    href="#faq"
+                                <Link
+                                    href="/support#faq"
                                     className="block transition hover:text-white">
                                     {t.supportLinks[1]}
-                                </a>
+                                </Link>
 
 
-                                <a
-                                    href="#about"
+                                <Link
+                                    href="/support#about"
                                     className="block transition hover:text-white">
                                     {t.supportLinks[2]}
-                                </a>
+                                </Link>
 
 
-                                <a
-                                    href="mailto:contact@bitcoinmembership.com"
+                                <Link
+                                    href="/support#contact"
                                     className="block transition hover:text-white">
                                     {t.supportLinks[3]}
-                                </a>
+                                </Link>
 
                             </div>
 

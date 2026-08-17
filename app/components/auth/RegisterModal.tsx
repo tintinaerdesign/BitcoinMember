@@ -37,7 +37,7 @@ const isValidLightningAddress = (address: string) =>
 const modalContent = {
     th: {
         title: "สมัครสมาชิก",
-        subtitle: "สะสมแต้มและรับสิทธิพิเศษจาก Bitcoin Membership",
+        subtitle: "สะสมแต้มและรับสิทธิพิเศษจาก Bitcoin Member",
         generalTab: "ผู้ใช้งานทั่วไป",
         storeTab: "ลงทะเบียนร้านค้า",
         phonePlaceholder: "กรอกเบอร์โทรศัพท์ (เช่น 0812345678)",
@@ -84,7 +84,7 @@ const modalContent = {
     },
     en: {
         title: "Join Membership",
-        subtitle: "Collect points and unlock benefits with Bitcoin Membership",
+        subtitle: "Collect points and unlock benefits with Bitcoin Member",
         generalTab: "General User",
         storeTab: "Merchant Registration",
         phonePlaceholder: "Enter mobile number",
@@ -131,7 +131,7 @@ const modalContent = {
     },
     zh: {
         title: "注册会员",
-        subtitle: "加入 Bitcoin Membership，获取专属权益",
+        subtitle: "加入 Bitcoin Member，获取专属权益",
         generalTab: "普通用户",
         storeTab: "商家注册",
         phonePlaceholder: "请输入手机号码",
