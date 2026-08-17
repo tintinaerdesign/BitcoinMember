@@ -485,7 +485,8 @@ export default function RegisterModal({
 
     return (
         <div
-            className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/80 px-3 py-4 backdrop-blur-md font-line sm:px-4 sm:py-6"
+            className="fixed inset-0 z-50 overflow-hidden overscroll-contain
+             bg-black/80 px-3 py-4 backdrop-blur-md font-line sm:px-4 sm:py-6"
             onClick={handleClose}
         >
             <div className="flex min-h-full items-start justify-center sm:items-center">
@@ -493,7 +494,7 @@ export default function RegisterModal({
                 className="relative my-auto flex w-full max-w-md max-h-[calc(100dvh-2rem)] flex-col overflow-hidden rounded-[28px] border border-white/20 bg-[#171717] text-white shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="pointer-events-none absolute -right-20 -top-20 z-0 h-44 w-44 rounded-full bg-amber-500/15 blur-[80px]" />
+
 
                 <div className="sticky top-0 z-30 flex shrink-0 items-center justify-end bg-[#171717]/95 px-4 pt-3 pb-2 backdrop-blur-sm">
                     <button
@@ -507,7 +508,8 @@ export default function RegisterModal({
                     </button>
                 </div>
 
-                <div className="relative z-10 min-h-0 flex-1 overflow-y-auto px-5 pb-5 md:px-8 md:pb-8">
+                <div className="hide-scrollbar relative z-10 min-h-0 flex-1
+                overflow-y-auto px-5 pb-5 md:px-8 md:pb-8">
                     {merchantStep !== "otp" && (
                         <>
                             <div className="mb-4 pr-2 text-center md:mb-6">
