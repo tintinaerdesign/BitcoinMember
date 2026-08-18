@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
     ArrowLeft,
     Link2,
+    Lock,
     Phone,
     ShieldCheck,
     Store,
@@ -22,7 +23,6 @@ interface RegisterModalProps {
 }
 
 type MerchantStep = "phone" | "otp";
-type PaymentNetwork = "onchain" | "lightning";
 
 const isValidBitcoinAddress = (address: string) => {
     const trimmed = address.trim();
@@ -41,6 +41,13 @@ const modalContent = {
         generalTab: "ผู้ใช้งานทั่วไป",
         storeTab: "ลงทะเบียนร้านค้า",
         phonePlaceholder: "กรอกเบอร์โทรศัพท์ (เช่น 0812345678)",
+        passwordLabel: "รหัสผ่าน",
+        passwordPlaceholder: "ตั้งรหัสผ่านอย่างน้อย 8 ตัวอักษร",
+        confirmPasswordLabel: "ยืนยันรหัสผ่าน",
+        confirmPasswordPlaceholder: "กรอกรหัสผ่านอีกครั้ง",
+        passwordError: "กรุณาตั้งรหัสผ่านอย่างน้อย 8 ตัวอักษร",
+        passwordMismatchError: "รหัสผ่านไม่ตรงกัน",
+        phoneExistsError: "เบอร์นี้ลงทะเบียนร้านค้าแล้ว",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
         paymentChannel: "ช่องทางการรับเงิน",
@@ -52,6 +59,7 @@ const modalContent = {
             "ห้ามกรอก Private Key เด็ดขาด — ช่องนี้ใช้สำหรับข้อมูลปลายทางรับเงินเท่านั้น เราไม่มีสิทธิ์เข้าถึงเงินของคุณ",
         bitcoinAddressError: "กรุณากรอก Bitcoin Address ที่ถูกต้อง",
         lightningAddressError: "กรุณากรอก Lightning Address ที่ถูกต้อง",
+        paymentRequiredError: "กรุณากรอก Bitcoin Address หรือ Lightning Address อย่างน้อยหนึ่งช่อง",
         continueBtn: "ดำเนินการต่อ",
         userRegistered: "สมัครสมาชิกสำเร็จ",
         terms: "การสมัครสมาชิกแสดงว่าคุณยอมรับข้อกำหนดและนโยบายความเป็นส่วนตัว",
@@ -76,12 +84,14 @@ const modalContent = {
         sendingOtp: "กำลังส่ง OTP...",
         verifyingOtp: "กำลังยืนยัน...",
         paymentTitle: "ปลายทางรับเงิน",
-        paymentSubtitle: "เลือกเครือข่ายและกรอกที่อยู่สำหรับรับชำระเงิน",
+        paymentSubtitle: "กรอก Bitcoin Address และ Lightning Address สำหรับรับชำระเงิน",
         storeContinueBtn: "ลงทะเบียนร้านค้า",
         registeringMerchant: "กำลังลงทะเบียน...",
         merchantRegistered: "ลงทะเบียนร้านค้าสำเร็จ",
         registerError: "ไม่สามารถลงทะเบียนร้านค้าได้ กรุณาลองใหม่",
         notVerifiedError: "กรุณายืนยันเบอร์โทรศัพท์ก่อน",
+        back: "ย้อนกลับ",
+        networkHint: "เลือกว่าจะรับเงินแบบ On-chain หรือ Lightning",
     },
     en: {
         title: "Join Membership",
@@ -89,6 +99,13 @@ const modalContent = {
         generalTab: "General User",
         storeTab: "Merchant Registration",
         phonePlaceholder: "Enter mobile number",
+        passwordLabel: "Password",
+        passwordPlaceholder: "Create a password (min. 8 characters)",
+        confirmPasswordLabel: "Confirm password",
+        confirmPasswordPlaceholder: "Enter password again",
+        passwordError: "Please enter a password with at least 8 characters",
+        passwordMismatchError: "Passwords do not match",
+        phoneExistsError: "This phone number is already registered",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
         paymentChannel: "Payment receiving channel",
@@ -100,6 +117,7 @@ const modalContent = {
             "Never enter your Private Key — this field is only for your receiving address. We cannot access your funds.",
         bitcoinAddressError: "Please enter a valid Bitcoin address",
         lightningAddressError: "Please enter a valid Lightning address",
+        paymentRequiredError: "Please enter a Bitcoin Address or Lightning Address",
         continueBtn: "Continue",
         userRegistered: "Registration successful",
         terms: "By joining, you agree to our Terms and Privacy Policy.",
@@ -124,12 +142,14 @@ const modalContent = {
         sendingOtp: "Sending OTP...",
         verifyingOtp: "Verifying...",
         paymentTitle: "Payment Destination",
-        paymentSubtitle: "Choose a network and enter your receiving address",
+        paymentSubtitle: "Enter Bitcoin Address and Lightning Address to receive payments",
         storeContinueBtn: "Register Merchant",
         registeringMerchant: "Registering...",
         merchantRegistered: "Merchant registered successfully",
         registerError: "Unable to register merchant. Please try again.",
         notVerifiedError: "Please verify your phone number first",
+        back: "Back",
+        networkHint: "Choose On-chain or Lightning to receive payments",
     },
     zh: {
         title: "注册会员",
@@ -137,6 +157,13 @@ const modalContent = {
         generalTab: "普通用户",
         storeTab: "商家注册",
         phonePlaceholder: "请输入手机号码",
+        passwordLabel: "密码",
+        passwordPlaceholder: "请设置至少 8 位密码",
+        confirmPasswordLabel: "确认密码",
+        confirmPasswordPlaceholder: "请再次输入密码",
+        passwordError: "请输入至少 8 位密码",
+        passwordMismatchError: "两次输入的密码不一致",
+        phoneExistsError: "该手机号已注册商家",
         onchainTab: "On-chain",
         lightningTab: "Lightning",
         paymentChannel: "收款方式",
@@ -148,6 +175,7 @@ const modalContent = {
             "请勿输入私钥 — 此栏仅用于填写您的收款地址，我们无法访问您的资金。",
         bitcoinAddressError: "请输入有效的比特币收款地址",
         lightningAddressError: "请输入有效的闪电地址",
+        paymentRequiredError: "请至少填写 Bitcoin Address 或 Lightning Address",
         continueBtn: "继续",
         userRegistered: "注册成功",
         terms: "注册即表示您同意我们的条款和隐私政策。",
@@ -172,12 +200,14 @@ const modalContent = {
         sendingOtp: "正在发送验证码...",
         verifyingOtp: "正在验证...",
         paymentTitle: "收款地址",
-        paymentSubtitle: "选择网络并填写收款地址",
+        paymentSubtitle: "填写 Bitcoin Address 和 Lightning Address 用于收款",
         storeContinueBtn: "注册商家",
         registeringMerchant: "正在注册...",
         merchantRegistered: "商家注册成功",
         registerError: "无法注册商家，请重试。",
         notVerifiedError: "请先验证手机号码",
+        back: "返回",
+        networkHint: "选择 On-chain 或 Lightning 作为收款方式",
     },
 };
 
@@ -191,10 +221,10 @@ export default function RegisterModal({
     const [userType, setUserType] = useState<"general" | "store">("general");
     const [merchantStep, setMerchantStep] = useState<MerchantStep>("phone");
     const [phone, setPhone] = useState("");
-    const [phoneVerified, setPhoneVerified] = useState(false);
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [bitcoinAddress, setBitcoinAddress] = useState("");
     const [lightningAddress, setLightningAddress] = useState("");
-    const [paymentNetwork, setPaymentNetwork] = useState<PaymentNetwork>("onchain");
     const [otp, setOtp] = useState(["", "", "", "", "", ""]);
     const [error, setError] = useState("");
     const [statusMessage, setStatusMessage] = useState("");
@@ -208,10 +238,10 @@ export default function RegisterModal({
         setUserType("general");
         setMerchantStep("phone");
         setPhone("");
-        setPhoneVerified(false);
+        setPassword("");
+        setConfirmPassword("");
         setBitcoinAddress("");
         setLightningAddress("");
-        setPaymentNetwork("onchain");
         setOtp(["", "", "", "", "", ""]);
         setError("");
         setStatusMessage("");
@@ -240,10 +270,10 @@ export default function RegisterModal({
         setUserType(nextType);
         setMerchantStep("phone");
         setPhone("");
-        setPhoneVerified(false);
+        setPassword("");
+        setConfirmPassword("");
         setBitcoinAddress("");
         setLightningAddress("");
-        setPaymentNetwork("onchain");
         setOtp(["", "", "", "", "", ""]);
         setError("");
         setStatusMessage("");
@@ -292,12 +322,20 @@ export default function RegisterModal({
     };
 
     const validateMerchantPayment = () => {
-        if (paymentNetwork === "onchain") {
-            if (!isValidBitcoinAddress(bitcoinAddress)) {
-                setError(t.bitcoinAddressError);
-                return false;
-            }
-        } else if (!isValidLightningAddress(lightningAddress)) {
+        const bitcoin = bitcoinAddress.trim();
+        const lightning = lightningAddress.trim();
+
+        if (!bitcoin && !lightning) {
+            setError(t.paymentRequiredError);
+            return false;
+        }
+
+        if (bitcoin && !isValidBitcoinAddress(bitcoin)) {
+            setError(t.bitcoinAddressError);
+            return false;
+        }
+
+        if (lightning && !isValidLightningAddress(lightning)) {
             setError(t.lightningAddressError);
             return false;
         }
@@ -305,7 +343,7 @@ export default function RegisterModal({
         return true;
     };
 
-    const handleMerchantPhoneSubmit = async (e: React.FormEvent) => {
+    const handleMerchantSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
 
@@ -319,6 +357,16 @@ export default function RegisterModal({
             return;
         }
 
+        if (password.length < 8) {
+            setError(t.passwordError);
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError(t.passwordMismatchError);
+            return;
+        }
+
         if (!validateMerchantPayment()) {
             return;
         }
@@ -329,13 +377,6 @@ export default function RegisterModal({
     const handleMerchantPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPhone(e.target.value.replace(/\D/g, "").slice(0, 10));
         if (error) setError("");
-    };
-
-    const resetMerchantPaymentFields = (network: PaymentNetwork) => {
-        setPaymentNetwork(network);
-        setBitcoinAddress("");
-        setLightningAddress("");
-        setError("");
     };
 
     const handleOtpChange = (index: number, value: string) => {
@@ -389,7 +430,6 @@ export default function RegisterModal({
                 return;
             }
 
-            setPhoneVerified(true);
             setOtp(["", "", "", "", "", ""]);
 
             if (userType === "store") {
@@ -413,14 +453,12 @@ export default function RegisterModal({
 
     const handleBackToPhone = () => {
         setMerchantStep("phone");
-        setPhoneVerified(false);
         setOtp(["", "", "", "", "", ""]);
         setError("");
     };
 
     const registerMerchant = async () => {
         if (!validateMerchantPayment()) {
-            setMerchantStep("phone");
             return;
         }
 
@@ -432,10 +470,9 @@ export default function RegisterModal({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     phone,
-                    paymentNetwork,
-                    bitcoinAddress: paymentNetwork === "onchain" ? bitcoinAddress.trim() : "",
-                    lightningAddress:
-                        paymentNetwork === "lightning" ? lightningAddress.trim() : "",
+                    password,
+                    bitcoinAddress: bitcoinAddress.trim(),
+                    lightningAddress: lightningAddress.trim(),
                 }),
             });
 
@@ -443,12 +480,20 @@ export default function RegisterModal({
 
             if (!response.ok) {
                 setError(
-                    data.error === "NOT_VERIFIED" ? t.notVerifiedError : t.registerError
+                    data.error === "INVALID_BITCOIN_ADDRESS"
+                        ? t.bitcoinAddressError
+                        : data.error === "INVALID_LIGHTNING_ADDRESS"
+                            ? t.lightningAddressError
+                            : data.error === "PAYMENT_ADDRESS_REQUIRED"
+                                ? t.paymentRequiredError
+                                : data.error === "WEAK_PASSWORD"
+                                    ? t.passwordError
+                                : data.error === "PHONE_EXISTS"
+                                    ? t.phoneExistsError
+                                    : data.error === "NOT_VERIFIED"
+                                        ? t.notVerifiedError
+                                        : t.registerError
                 );
-                if (data.error === "NOT_VERIFIED") {
-                    setPhoneVerified(false);
-                }
-                setMerchantStep("phone");
                 return;
             }
 
@@ -456,7 +501,6 @@ export default function RegisterModal({
             window.setTimeout(() => handleClose(), 1200);
         } catch {
             setError(t.registerError);
-            setMerchantStep("phone");
         } finally {
             setIsRegistering(false);
         }
@@ -510,7 +554,7 @@ export default function RegisterModal({
 
                 <div className="hide-scrollbar relative z-10 min-h-0 flex-1
                 overflow-y-auto px-5 pb-5 md:px-8 md:pb-8">
-                    {merchantStep !== "otp" && (
+                    {merchantStep === "phone" && (
                         <>
                             <div className="mb-4 pr-2 text-center md:mb-6">
                                 <h3 className="text-2xl font-bold text-amber-500 md:text-3xl">{t.title}</h3>
@@ -590,7 +634,7 @@ export default function RegisterModal({
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                             >
-                                <form onSubmit={handleMerchantPhoneSubmit}>
+                                <form onSubmit={handleMerchantSubmit}>
                                     <div className="relative mb-4">
                                         <Phone size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
                                         <input
@@ -605,54 +649,80 @@ export default function RegisterModal({
                                         />
                                     </div>
 
-                                    <p className="mb-2 text-sm font-semibold text-zinc-200">{t.paymentChannel}</p>
-
-                                    <div className="mb-4 flex rounded-lg border border-white/10 bg-black/30 p-0.5">
-                                        <button
-                                            type="button"
-                                            onClick={() => resetMerchantPaymentFields("onchain")}
-                                            className={`flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium transition-all ${paymentNetwork === "onchain" ? "bg-white/15 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
-                                        >
-                                            <Link2 size={14} />
-                                            {t.onchainTab}
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => resetMerchantPaymentFields("lightning")}
-                                            className={`flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium transition-all ${paymentNetwork === "lightning" ? "bg-white/15 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
-                                        >
-                                            <Zap size={14} />
-                                            {t.lightningTab}
-                                        </button>
+                                    <label htmlFor="merchant-password" className="mb-2 block text-sm font-semibold text-zinc-200">
+                                        {t.passwordLabel}
+                                    </label>
+                                    <div className="relative mb-4">
+                                        <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            id="merchant-password"
+                                            type="password"
+                                            required
+                                            autoComplete="new-password"
+                                            value={password}
+                                            onChange={(e) => {
+                                                setPassword(e.target.value);
+                                                if (error) setError("");
+                                            }}
+                                            placeholder={t.passwordPlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-3 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 md:py-3.5"
+                                        />
                                     </div>
 
-                                    <div className="mb-4">
-                                        <label htmlFor="merchant-payment-address" className="mb-1.5 block text-sm font-medium text-zinc-300">
-                                            {paymentNetwork === "onchain" ? t.onchainLabel : t.lightningLabel}
-                                        </label>
-                                        <div className="relative">
-                                            {paymentNetwork === "onchain" ? (
-                                                <Link2 size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
-                                            ) : (
-                                                <Zap size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
-                                            )}
-                                            <input
-                                                id="merchant-payment-address"
-                                                type="text"
-                                                required
-                                                value={paymentNetwork === "onchain" ? bitcoinAddress : lightningAddress}
-                                                onChange={(e) => {
-                                                    if (paymentNetwork === "onchain") {
-                                                        setBitcoinAddress(e.target.value);
-                                                    } else {
-                                                        setLightningAddress(e.target.value);
-                                                    }
-                                                    if (error) setError("");
-                                                }}
-                                                placeholder={paymentNetwork === "onchain" ? t.onchainPlaceholder : t.lightningPlaceholder}
-                                                className="w-full rounded-xl border border-white/20 bg-black/50 py-3.5 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
-                                            />
-                                        </div>
+                                    <label htmlFor="merchant-confirm-password" className="mb-2 block text-sm font-semibold text-zinc-200">
+                                        {t.confirmPasswordLabel}
+                                    </label>
+                                    <div className="relative mb-4">
+                                        <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            id="merchant-confirm-password"
+                                            type="password"
+                                            required
+                                            autoComplete="new-password"
+                                            value={confirmPassword}
+                                            onChange={(e) => {
+                                                setConfirmPassword(e.target.value);
+                                                if (error) setError("");
+                                            }}
+                                            placeholder={t.confirmPasswordPlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-3 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 md:py-3.5"
+                                        />
+                                    </div>
+
+                                    <label htmlFor="merchant-lightning-address" className="mb-2 block text-sm font-semibold text-zinc-200">
+                                        {t.lightningLabel}
+                                    </label>
+                                    <div className="relative mb-4">
+                                        <Zap size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            id="merchant-lightning-address"
+                                            type="text"
+                                            value={lightningAddress}
+                                            onChange={(e) => {
+                                                setLightningAddress(e.target.value);
+                                                if (error) setError("");
+                                            }}
+                                            placeholder={t.lightningPlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-3 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 md:py-3.5"
+                                        />
+                                    </div>
+
+                                    <label htmlFor="merchant-bitcoin-address" className="mb-2 block text-sm font-semibold text-zinc-200">
+                                        {t.onchainLabel}
+                                    </label>
+                                    <div className="relative mb-4">
+                                        <Link2 size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500" />
+                                        <input
+                                            id="merchant-bitcoin-address"
+                                            type="text"
+                                            value={bitcoinAddress}
+                                            onChange={(e) => {
+                                                setBitcoinAddress(e.target.value);
+                                                if (error) setError("");
+                                            }}
+                                            placeholder={t.onchainPlaceholder}
+                                            className="w-full rounded-xl border border-white/20 bg-black/50 py-3 pl-11 pr-4 text-base text-white outline-none transition-all placeholder:text-zinc-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 md:py-3.5"
+                                        />
                                     </div>
 
                                     <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 md:px-4 md:py-3">
@@ -669,10 +739,10 @@ export default function RegisterModal({
 
                                     <button
                                         type="submit"
-                                        disabled={isSendingOtp || isRegistering}
+                                        disabled={isSendingOtp}
                                         className="mb-3 w-full cursor-pointer rounded-xl bg-amber-500 py-3.5 text-lg font-bold text-black shadow-lg shadow-amber-500/10 transition-all hover:bg-amber-400 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 md:mb-4 md:py-4"
                                     >
-                                        {isSendingOtp ? t.sendingOtp : t.storeContinueBtn}
+                                        {isSendingOtp ? t.sendingOtp : t.sendOtpBtn}
                                     </button>
                                 </form>
 
@@ -732,13 +802,22 @@ export default function RegisterModal({
                                     {error && (
                                         <p className="mt-4 text-center text-sm text-red-400">{error}</p>
                                     )}
+                                    {statusMessage && (
+                                        <p className="mt-4 text-center text-sm text-emerald-400">{statusMessage}</p>
+                                    )}
 
                                     <button
                                         type="submit"
-                                        disabled={isVerifyingOtp}
+                                        disabled={isVerifyingOtp || isRegistering}
                                         className="mt-6 w-full cursor-pointer rounded-xl bg-amber-500 py-4 text-lg font-bold text-black shadow-lg shadow-amber-500/10 transition-all hover:bg-amber-400 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
                                     >
-                                        {isVerifyingOtp ? t.verifyingOtp : t.otpButton}
+                                        {isRegistering
+                                            ? t.registeringMerchant
+                                            : isVerifyingOtp
+                                                ? t.verifyingOtp
+                                                : userType === "store"
+                                                    ? t.storeContinueBtn
+                                                    : t.otpButton}
                                     </button>
                                 </form>
 
